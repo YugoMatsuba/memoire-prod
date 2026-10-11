@@ -1,0 +1,48 @@
+services:
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: memoire-client
+    # Port 5173 in this computer mapped to this container's 5173
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    depends_on:
+      - server
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: memoire-server
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./server:/app
+    environment:
+      DATABASE_URL: postgresql://memoire:memoire_password@db:5432/memoire_dev
+    depends_on:
+      - db
+
+  db:
+  # The complete image is already provided by docker for postgre
+  # Rather than building a new image using a dockerfile, pull an existing image
+  # During docker compose up, the image is pulled if it does not exist in storage
+  # There is no need to build an image
+    image: postgres:17
+    container_name: memoire-postgres
+    environment:
+      POSTGRES_USER: memoire
+      POSTGRES_PASSWORD: memoire_password
+      POSTGRES_DB: memoire_dev
+    ports:
+      - "5432:5432"
+    # Docker volume mounted for persistent storage  
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
