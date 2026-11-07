@@ -1,33 +1,25 @@
 ## Background and Problem
 
-<!-- Describe why this decision is needed and what problem it solves. -->
+Backend services need a consistent structure that separates API handling, business rules, and infrastructure.
 
 ## Decision
 
-<!-- Describe what will be done and which approach has been selected. -->
+Use a four-layer architecture within each service:
+
+- **Presentation:** Routes, request/response schemas, and HTTP error mapping. Calls application services.
+- **Application:** Service classes that coordinate entity logic
+- **Domain:** Entities, business rules, and repository interfaces.
+- **Infrastructure:** Repository implementations, ORM models, and external clients.
 
 ## Options
 
-### Option 1: xxx
+### Option 1: Four-layer architecture (selected)
 
 👍**Pros**
 
--
+- Clear responsibilities and independently testable business rules.
+- Infrastructure can change without changing domain behavior.
 
 👎**Cons**
 
--
-
-### Option 2: xxx
-
-👍**Pros**
-
--
-
-👎**Cons**
-
--
-
-## Concerns and Impact
-
-<!-- Describe risks, affected components, migration needs, and other expected impacts. -->
+- More interfaces and mapping code
