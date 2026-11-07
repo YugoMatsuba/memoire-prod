@@ -1,0 +1,24 @@
+# Implementation Design Record
+
+## Issue
+
+Implement login and registration pages.
+
+## Implementation Overview
+
+- Add login and registration routes and page components.
+- Use the `useLogin` and `useRegister` custom hooks for state management and API requests.
+
+## Key Design Decisions
+
+Use React Router in the `App` component for page navigation.
+
+## Testing
+
+No testing is necessary at this stage.
+
+## Learning
+
+- **React rendering:** The browser creates the root div from `index.html`, and `main.tsx` renders the `App` component inside it.
+- **React Router:** The `App` component uses React Router to display different page components based on the URL path. `App` stays mounted under the root div while the page displayed inside it changes.
+- **Custom React hooks:** Custom functions that use built-in React hooks, such as `useState`, or other custom hooks.

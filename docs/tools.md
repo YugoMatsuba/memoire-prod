@@ -13,6 +13,7 @@ This document lists the main development tools used by the frontend and backend 
 - Package management: npm
 - Unit testing: Vitest
 - Component testing: React Testing Library
+- Playwright for E2E testing
 
 ## Backend
 
